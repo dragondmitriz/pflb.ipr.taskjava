@@ -25,7 +25,7 @@ public class task2_1 {
                 }
             }
 
-            FileWriter writer = new FileWriter(resultFile + ".csv");
+            FileWriter writer = new FileWriter(resultFile + ".log");
             writer.write(resultString.toString());
             writer.close();
 
