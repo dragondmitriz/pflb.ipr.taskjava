@@ -25,7 +25,7 @@ public class task1 {
                     System.out.println("Предел размера файла достигнут. Создание нового файла.");
 
                     writer.close();
-                    writer = new FileWriter(indFile++ + ".log");
+                    writer = new FileWriter(prefix + (indFile++) + ".log");
                     size = 0;
                 }
                 writer.write(line+"\n");
