@@ -46,7 +46,7 @@ public class task2_2 {
             List<File> logFiles = f.isDirectory() ? Arrays.asList(f.listFiles()) : Collections.singletonList(f);
             for (File log : logFiles) {
                 if (log.isFile()) {
-                    Files.readAllLines(log.toPath()).forEach(line -> resultString.append( String.join(";", getAllRegex(line)) ).append("\n"));
+                    Files.readAllLines(log.toPath()).forEach(line -> resultString.append( String.join(spliter, getAllRegex(line)) ).append("\n"));
                 }
             }
 
