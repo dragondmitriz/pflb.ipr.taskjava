@@ -1,6 +1,7 @@
 package dmitriz.pflb.ipr;
 
 import java.io.*;
+import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -46,7 +47,11 @@ public class task2b {
             List<File> logFiles = f.isDirectory() ? Arrays.asList(f.listFiles()) : Collections.singletonList(f);
             for (File log : logFiles) {
                 if (log.isFile()) {
-                    Files.readAllLines(log.toPath()).forEach(line -> resultString.append( String.join(spliter, getAllRegex(line)) ).append("\n"));
+                    try{
+                        Files.readAllLines(log.toPath()).forEach(line -> resultString.append( String.join(spliter, getAllRegex(line)) ).append("\n"));
+                    } catch (MalformedInputException e){
+                        Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).forEach(line -> resultString.append( String.join(spliter, getAllRegex(line)) ).append("\n"));
+                    }
                 }
             }
 
