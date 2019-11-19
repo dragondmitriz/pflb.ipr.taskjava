@@ -29,7 +29,6 @@ public class task2b {
                 result.add(matcher.group(8));
             }
         }
-        System.out.println(result.toString());
         return result;
     }
 
