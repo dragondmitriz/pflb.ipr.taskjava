@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class task2_2 {
+public class task2b {
 
     private static final String REGEX = "^(\\d{2}.\\d{2}.\\d{4}) (\\d{2}:\\d{2}:\\d{2}.\\d{3}) (\\w{3}[\\w ]{2}): (((.+)\\t(.*))|(.*))$";
 

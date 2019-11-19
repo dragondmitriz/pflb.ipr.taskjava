@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class task2_1 {
+public class task2a {
 
     public static void main(String[] args) {
 
