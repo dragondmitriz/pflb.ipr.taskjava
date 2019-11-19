@@ -1,6 +1,7 @@
 package dmitriz.pflb.ipr;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +51,8 @@ public class task2b {
                 }
             }
 
-            FileWriter writer = new FileWriter(resultFile + ".csv");
+            FileOutputStream foutstream = new FileOutputStream(resultFile + ".csv");
+            OutputStreamWriter writer = new OutputStreamWriter(foutstream, StandardCharsets.UTF_8);
             writer.write(resultString.toString());
             writer.close();
 

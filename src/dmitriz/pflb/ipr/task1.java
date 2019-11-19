@@ -1,6 +1,8 @@
 package dmitriz.pflb.ipr;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class task1 {
 
@@ -16,7 +18,8 @@ public class task1 {
 
             int size = 0;
             int indFile = 0;
-            FileWriter writer = new FileWriter(prefix + (indFile++) + ".log");
+            FileOutputStream foutstream = new FileOutputStream(prefix + (indFile++) + ".log");
+            OutputStreamWriter writer = new OutputStreamWriter(foutstream, StandardCharsets.UTF_8);
 
             String line;
             while ((line=reader.readLine()) != null){

@@ -1,6 +1,8 @@
 package dmitriz.pflb.ipr;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,7 +27,8 @@ public class task2a {
                 }
             }
 
-            FileWriter writer = new FileWriter(resultFile + ".log");
+            FileOutputStream foutstream = new FileOutputStream(resultFile + ".log");
+            OutputStreamWriter writer = new OutputStreamWriter(foutstream, StandardCharsets.UTF_8);
             writer.write(resultString.toString());
             writer.close();
 
@@ -34,7 +37,5 @@ public class task2a {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
