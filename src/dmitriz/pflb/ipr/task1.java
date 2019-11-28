@@ -25,7 +25,7 @@ public class task1 {
             while ((line=reader.readLine()) != null){
                 size += line.length();
                 if (size >= MAX_SIZE){
-                    System.out.println("Предел размера файла достигнут. Создание нового файла.");
+                    System.out.println("Check max size of file - next new file.");
 
                     writer.close();
                     writer = new FileWriter(prefix + (indFile++) + ".log");
@@ -33,10 +33,7 @@ public class task1 {
                 }
                 writer.write(line+"\n");
             }
-            System.out.println("Разделение на файлы завершено.");
-
-            writer.close();
-            reader.close();
+            System.out.println("Spliting is finished.");
         } catch (FileNotFoundException e) {
             System.out.println("Файл main.log.2014-11-17 отсутсвует");
         } catch (IOException e) {
