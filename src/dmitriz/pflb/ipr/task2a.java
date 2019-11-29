@@ -1,7 +1,6 @@
 package dmitriz.pflb.ipr;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -25,9 +24,13 @@ public class task2a {
             for (File log : logFiles) {
                 if (log.isFile()) {
                     try{
-                        Files.readAllLines(log.toPath()).forEach(line -> resultString.append(line.matches(findString) ? line + "\n" : ""));
-                    } catch (MalformedInputException e){
-                        Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).forEach(line -> resultString.append(line.matches(findString) ? line + "\n" : ""));
+                        Files.readAllLines(log.toPath()).
+                                forEach(line -> resultString.
+                                        append(line.matches(findString) ? line + "\n" : ""));
+                    } catch (MalformedInputException e) {
+                        Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).
+                                forEach(line -> resultString.
+                                        append(line.matches(findString) ? line + "\n" : ""));
                     }
                 }
             }
