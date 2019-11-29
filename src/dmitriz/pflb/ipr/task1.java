@@ -9,11 +9,11 @@ public class task1 {
 
     public static void main(String[] args){
 
-        String filename = args[0];
+        String fileName = args[0];
         String prefix = args[1];
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
             int size = 0;
             int index = 0;
