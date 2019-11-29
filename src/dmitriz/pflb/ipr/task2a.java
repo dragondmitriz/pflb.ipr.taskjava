@@ -13,20 +13,24 @@ public class task2a {
     public static void main(String[] args) {
 
         String findString = args[0];
-        String logfiles = args[1];
-        String resultFile = args[2];
+        String pathLog = args[1];
+        String pathResult = args[2];
 
         try {
             StringBuilder resultString = new StringBuilder("");
 
-            File f = new File(logfiles);
-            List<File> logFiles = f.isDirectory() ? Arrays.asList(f.listFiles()) : Collections.singletonList(f);
+            File f = new File(pathLog);
+            List<File> logFiles = f.isDirectory() ?
+                    Arrays.asList(f.listFiles()) :
+                    Collections.singletonList(f);
             for (File log : logFiles) {
+
                 if (log.isFile()) {
-                    try{
+                    try {
                         Files.readAllLines(log.toPath()).
                                 forEach(line -> resultString.
                                         append(line.matches(findString) ? line + "\n" : ""));
+
                     } catch (MalformedInputException e) {
                         Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).
                                 forEach(line -> resultString.
@@ -35,10 +39,8 @@ public class task2a {
                 }
             }
 
-            FileOutputStream foutstream = new FileOutputStream(resultFile + ".log");
-            OutputStreamWriter writer = new OutputStreamWriter(foutstream, StandardCharsets.UTF_8);
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(pathResult + ".log"), StandardCharsets.UTF_8);
             writer.write(resultString.toString());
-            writer.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("Указанные логи отсуствуют");
