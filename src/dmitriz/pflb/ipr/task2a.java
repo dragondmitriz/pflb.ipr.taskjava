@@ -43,7 +43,7 @@ public class task2a {
             writer.write(resultString.toString());
 
         } catch (FileNotFoundException e) {
-            System.out.println("Указанные логи отсуствуют");
+            System.out.println("Incorrect path to log");
         } catch (IOException e) {
             e.printStackTrace();
         }
