@@ -16,25 +16,25 @@ public class task1 {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
 
             int size = 0;
-            int indFile = 0;
-            FileOutputStream foutstream = new FileOutputStream(prefix + (indFile++) + ".log");
-            OutputStreamWriter writer = new OutputStreamWriter(foutstream, StandardCharsets.UTF_8);
+            int index = 0;
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(prefix + index + ".log"), StandardCharsets.UTF_8);
 
             String line;
-            while ((line=reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 size += line.length();
-                if (size >= MAX_SIZE){
+                if (size >= MAX_SIZE) {
                     System.out.println("Check max size of file - next new file.");
 
-                    writer.close();
-                    writer = new FileWriter(prefix + (indFile++) + ".log");
+                    index++;
+                    writer = new OutputStreamWriter(new FileOutputStream(prefix + index + ".log"), StandardCharsets.UTF_8);
                     size = 0;
                 }
                 writer.write(line+"\n");
             }
+
             System.out.println("Spliting is finished.");
         } catch (FileNotFoundException e) {
-            System.out.println("Файл main.log.2014-11-17 отсутсвует");
+            System.out.println("File main.log.2014-11-17 is not found.");
         } catch (IOException e) {
             e.printStackTrace();
         }
