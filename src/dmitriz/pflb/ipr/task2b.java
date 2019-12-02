@@ -36,27 +36,26 @@ public class task2b {
     public static void main(String[] args) {
 
         String spliter = args[0];
-        String logfiles = args[1];
+        String logPath = args[1];
         String resultFile = args[2];
 
         try {
             StringBuilder resultString = new StringBuilder("");
 
 
-            File f = new File(logfiles);
-            List<File> logFiles = f.isDirectory() ? Arrays.asList(f.listFiles()) : Collections.singletonList(f);
+            File file = new File(logPath);
+            List<File> logFiles = file.isDirectory() ? Arrays.asList(file.listFiles()) : Collections.singletonList(file);
             for (File log : logFiles) {
                 if (log.isFile()) {
-                    try{
-                        Files.readAllLines(log.toPath()).forEach(line -> resultString.append( String.join(spliter, getAllRegex(line)) ).append("\n"));
-                    } catch (MalformedInputException e){
-                        Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).forEach(line -> resultString.append( String.join(spliter, getAllRegex(line)) ).append("\n"));
+                    try {
+                        Files.readAllLines(log.toPath()).forEach(line -> resultString.append(String.join(spliter, getAllRegex(line))).append("\n"));
+                    } catch (MalformedInputException e) {
+                        Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).forEach(line -> resultString.append(String.join(spliter, getAllRegex(line))).append("\n"));
                     }
                 }
             }
 
-            FileOutputStream foutstream = new FileOutputStream(resultFile + ".csv");
-            OutputStreamWriter writer = new OutputStreamWriter(foutstream, StandardCharsets.UTF_8);
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(resultFile + ".csv"), StandardCharsets.UTF_8);
             writer.write(resultString.toString());
             writer.close();
 
