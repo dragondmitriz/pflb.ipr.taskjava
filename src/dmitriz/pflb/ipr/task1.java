@@ -17,7 +17,8 @@ public class task1 {
 
             int size = 0;
             int index = 0;
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(prefix + index + ".log"), StandardCharsets.UTF_8);
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(prefix + index + ".log"),
+                    StandardCharsets.UTF_8);
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -26,7 +27,8 @@ public class task1 {
                     System.out.println("Check max size of file - next new file.");
 
                     index++;
-                    writer = new OutputStreamWriter(new FileOutputStream(prefix + index + ".log"), StandardCharsets.UTF_8);
+                    writer = new OutputStreamWriter(new FileOutputStream(prefix + index + ".log"),
+                            StandardCharsets.UTF_8);
                     size = 0;
                 }
                 writer.write(line+"\n");
