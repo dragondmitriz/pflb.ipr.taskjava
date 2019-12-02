@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class task2a {
 
@@ -17,25 +18,28 @@ public class task2a {
         String pathResult = args[2];
 
         try {
-            StringBuilder resultString = new StringBuilder("");
+            StringBuilder resultString = new StringBuilder();
 
             File f = new File(pathLog);
             List<File> logFiles = f.isDirectory() ?
-                    Arrays.asList(f.listFiles()) :
+                    Arrays.asList(Objects.requireNonNull(f.
+                            listFiles((dir, name) -> name.
+                                    matches(".+.log$")))) :
                     Collections.singletonList(f);
+
             for (File log : logFiles) {
 
                 if (log.isFile()) {
-                    try {
-                        Files.readAllLines(log.toPath()).
-                                forEach(line -> resultString.
-                                        append(line.matches(findString) ? line + "\n" : ""));
+//                    try {
+                    Files.readAllLines(log.toPath()).
+                            forEach(line -> resultString.
+                                    append(line.matches(findString) ? line + "\n" : ""));
 
-                    } catch (MalformedInputException e) {
-                        Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).
-                                forEach(line -> resultString.
-                                        append(line.matches(findString) ? line + "\n" : ""));
-                    }
+//                    } catch (MalformedInputException e) {
+//                        Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).
+//                                forEach(line -> resultString.
+//                                        append(line.matches(findString) ? line + "\n" : ""));
+//                    }
                 }
             }
 

@@ -7,7 +7,7 @@ public class task1 {
 
     private static final int MAX_SIZE = 10485760;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         String fileName = args[0];
         String prefix = args[1];
@@ -31,7 +31,7 @@ public class task1 {
                             StandardCharsets.UTF_8);
                     size = 0;
                 }
-                writer.write(line+"\n");
+                writer.write(line + "\n");
             }
 
             System.out.println("Spliting is finished.");
