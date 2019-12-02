@@ -62,7 +62,7 @@ public class task2b {
             writer.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("Указанные логи отсуствуют");
+            System.out.println("Incorrect path to log");
         } catch (IOException e) {
             e.printStackTrace();
         }
