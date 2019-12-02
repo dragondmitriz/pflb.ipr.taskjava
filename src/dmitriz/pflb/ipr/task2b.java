@@ -44,18 +44,20 @@ public class task2b {
 
 
             File file = new File(logPath);
-            List<File> logFiles = file.isDirectory() ? Arrays.asList(file.listFiles()) : Collections.singletonList(file);
+            List<File> logFiles = file.isDirectory() ?
+                    Arrays.asList(file.listFiles()) :
+                    Collections.singletonList(file);
             for (File log : logFiles) {
                 if (log.isFile()) {
-                    try {
-                        Files.readAllLines(log.toPath()).forEach(line -> resultString.append(String.join(spliter, getAllRegex(line))).append("\n"));
-                    } catch (MalformedInputException e) {
-                        Files.readAllLines(log.toPath(), StandardCharsets.ISO_8859_1).forEach(line -> resultString.append(String.join(spliter, getAllRegex(line))).append("\n"));
-                    }
+                    Files.readAllLines(log.toPath())
+                            .forEach(line -> resultString
+                                    .append(String.join(spliter, getAllRegex(line)))
+                                    .append("\n"));
                 }
             }
 
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(resultFile + ".csv"), StandardCharsets.UTF_8);
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(resultFile + ".csv"),
+                    StandardCharsets.UTF_8);
             writer.write(resultString.toString());
             writer.close();
 
