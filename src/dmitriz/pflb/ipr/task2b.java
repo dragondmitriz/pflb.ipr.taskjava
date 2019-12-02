@@ -4,10 +4,7 @@ import java.io.*;
 import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,7 +42,9 @@ public class task2b {
 
             File file = new File(logPath);
             List<File> logFiles = file.isDirectory() ?
-                    Arrays.asList(file.listFiles()) :
+                    Arrays.asList(Objects.requireNonNull(file.
+                            listFiles((dir, name) -> name.
+                                    matches(".+.log$")))) :
                     Collections.singletonList(file);
             for (File log : logFiles) {
                 if (log.isFile()) {
