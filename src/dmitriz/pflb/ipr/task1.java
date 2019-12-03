@@ -35,7 +35,7 @@ public class task1 {
             }
 
             System.out.println("Spliting is finished.");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +
                     "Arguments of task 1:\n" +
                     "\tlog file name\n" +

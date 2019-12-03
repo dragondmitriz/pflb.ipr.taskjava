@@ -46,7 +46,7 @@ public class task2a {
             OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(pathResult + ".log"), StandardCharsets.UTF_8);
             writer.write(resultString.toString());
 
-        } catch (IndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +
                     "Arguments of task 2a:\n" +
                     "\tregex find string\n" +

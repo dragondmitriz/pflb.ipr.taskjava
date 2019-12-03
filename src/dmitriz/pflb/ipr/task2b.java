@@ -60,7 +60,7 @@ public class task2b {
             writer.write(resultString.toString());
             writer.close();
 
-        } catch (IndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +
                     "Arguments of task 2b:\n" +
                     "\tseparator\n" +
