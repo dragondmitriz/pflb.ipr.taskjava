@@ -9,10 +9,10 @@ public class task1 {
 
     public static void main(String[] args) {
 
-        String fileName = args[0];
-        String prefix = args[1];
-
         try {
+            String fileName = args[0];
+            String prefix = args[1];
+
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
             int size = 0;
@@ -35,6 +35,11 @@ public class task1 {
             }
 
             System.out.println("Spliting is finished.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Not found full parameters.\n" +
+                    "Arguments of task 1:\n" +
+                    "\tlog file name\n" +
+                    "\tprefix of log file name after splitting");
         } catch (FileNotFoundException e) {
             System.out.println("File main.log.2014-11-17 is not found.");
         } catch (IOException e) {

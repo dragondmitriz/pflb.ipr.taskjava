@@ -13,11 +13,11 @@ public class task2a {
 
     public static void main(String[] args) {
 
-        String findString = args[0];
-        String pathLog = args[1];
-        String pathResult = args[2];
-
         try {
+            String findString = args[0];
+            String pathLog = args[1];
+            String pathResult = args[2];
+
             StringBuilder resultString = new StringBuilder();
 
             File f = new File(pathLog);
@@ -46,6 +46,12 @@ public class task2a {
             OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(pathResult + ".log"), StandardCharsets.UTF_8);
             writer.write(resultString.toString());
 
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Not found full parameters.\n" +
+                    "Arguments of task 2a:\n" +
+                    "\tregex find string\n" +
+                    "\tpath to log file(s)\n" +
+                    "\tname of result log file");
         } catch (FileNotFoundException e) {
             System.out.println("Incorrect path to log");
         } catch (IOException e) {

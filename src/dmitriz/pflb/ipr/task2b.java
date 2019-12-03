@@ -32,11 +32,11 @@ public class task2b {
 
     public static void main(String[] args) {
 
-        String spliter = args[0];
-        String logPath = args[1];
-        String resultFile = args[2];
-
         try {
+            String spliter = args[0];
+            String logPath = args[1];
+            String resultFile = args[2];
+
             StringBuilder resultString = new StringBuilder("");
 
 
@@ -60,6 +60,12 @@ public class task2b {
             writer.write(resultString.toString());
             writer.close();
 
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Not found full parameters.\n" +
+                    "Arguments of task 2b:\n" +
+                    "\tseparator\n" +
+                    "\tpath to log file(s)\n" +
+                    "\tname of result csv file");
         } catch (FileNotFoundException e) {
             System.out.println("Incorrect path to log");
         } catch (IOException e) {
