@@ -4,6 +4,9 @@ import java.io.*;
 import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,8 +39,7 @@ public class task2a {
                 }
             }
 
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(pathResult + ".log"), StandardCharsets.UTF_8);
-            writer.write(resultString.toString());
+            Files.write(Paths.get(pathResult), resultString.toString().getBytes(), StandardOpenOption.CREATE);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +
