@@ -5,6 +5,7 @@ import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,7 +42,6 @@ public class task2b {
 
             StringBuilder resultString = new StringBuilder("");
 
-
             File file = new File(logPath);
             List<File> logFiles = file.isDirectory() ?
                     Arrays.asList(Objects.requireNonNull(file.
@@ -59,10 +59,7 @@ public class task2b {
                 }
             }
 
-//            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(resultFile + ".csv"),
-//                    StandardCharsets.UTF_8);
-//            writer.write(resultString.toString());
-            Files.write(Paths.get(new File(resultFile).getPath()), resultString.toString().getBytes());
+            Files.write(Paths.get(resultFile + ".csv"), resultString.toString().getBytes(), StandardOpenOption.CREATE);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +
