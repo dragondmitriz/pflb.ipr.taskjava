@@ -16,6 +16,10 @@ public class task1 {
             int size = 0;
             int index = 0;
 
+            File newLogFile = new File(prefix + index + ".log");
+            if (newLogFile.exists()) newLogFile.delete();
+
+
             String line;
             while ((line = reader.readLine()) != null) {
 
@@ -25,9 +29,14 @@ public class task1 {
 
                     size += line.length();
                     if (size >= MAX_SIZE) {
+
                         System.out.println("Check max size of file - next new file.");
 
                         index++;
+
+                        newLogFile = new File(prefix + index + ".log");
+                        if (newLogFile.exists()) newLogFile.delete();
+
                         size = 0;
                     }
                     writer.write(line + "\n");

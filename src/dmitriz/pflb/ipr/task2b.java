@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,6 +34,7 @@ public class task2b {
     public static void main(String[] args) {
 
         try {
+
             String spliter = args[0];
             String logPath = args[1];
             String resultFile = args[2];
@@ -47,7 +49,9 @@ public class task2b {
                                     matches(".+.log$")))) :
                     Collections.singletonList(file);
             for (File log : logFiles) {
+
                 if (log.isFile()) {
+
                     Files.readAllLines(log.toPath())
                             .forEach(line -> resultString
                                     .append(String.join(spliter, getAllRegex(line)))
@@ -55,10 +59,10 @@ public class task2b {
                 }
             }
 
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(resultFile + ".csv"),
-                    StandardCharsets.UTF_8);
-            writer.write(resultString.toString());
-            writer.close();
+//            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(resultFile + ".csv"),
+//                    StandardCharsets.UTF_8);
+//            writer.write(resultString.toString());
+            Files.write(Paths.get(new File(resultFile).getPath()), resultString.toString().getBytes());
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +
