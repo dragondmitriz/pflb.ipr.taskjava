@@ -1,8 +1,6 @@
 package dmitriz.pflb.ipr;
 
 import java.io.*;
-import java.nio.charset.MalformedInputException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -12,13 +10,14 @@ import java.util.regex.Pattern;
 
 public class task2b {
 
-    private static final String REGEX = "^(\\d{2}.\\d{2}.\\d{4}) (\\d{2}:\\d{2}:\\d{2}.\\d{3}) (\\w{3}[\\w ]{2}): (((.+)\\t(.*))|(.*))$";
+    private static final String REGEX =
+            "^(\\d{2}.\\d{2}.\\d{4}) (\\d{2}:\\d{2}:\\d{2}.\\d{3}) (\\w{3}[\\w ]{2}): (((.+)\\t(.*))|(.*))$";
 
-    private static List getAllRegex(String target){
+    private static List getAllRegex(String target) {
         List result = new ArrayList();
 
         Matcher matcher = Pattern.compile(REGEX).matcher(target);
-        while(matcher.find()){
+        while (matcher.find()) {
             result.add(matcher.group(1));
             result.add(matcher.group(2));
             result.add(matcher.group(3));
@@ -33,7 +32,6 @@ public class task2b {
     }
 
     public static void main(String[] args) {
-
         try {
 
             String spliter = args[0];
@@ -52,14 +50,22 @@ public class task2b {
 
                 if (log.isFile()) {
 
-                    Files.readAllLines(log.toPath())
-                            .forEach(line -> resultString
+                    try (BufferedReader reader = new BufferedReader(new FileReader(log))) {
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+
+                            resultString
                                     .append(String.join(spliter, getAllRegex(line)))
-                                    .append("\n"));
+                                    .append("\n");
+                        }
+                    }
                 }
             }
 
-            Files.write(Paths.get(resultFile + ".csv"), resultString.toString().getBytes(), StandardOpenOption.CREATE);
+            Files.write(Paths.get(resultFile + ".csv"),
+                    resultString.toString().getBytes(),
+                    StandardOpenOption.CREATE);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +

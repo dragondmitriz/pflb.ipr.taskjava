@@ -1,10 +1,7 @@
 package dmitriz.pflb.ipr;
 
 import java.io.*;
-import java.nio.charset.MalformedInputException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
@@ -38,7 +35,7 @@ public class task2a {
                         String line;
                         while ((line = reader.readLine()) != null) {
 
-                            resultString.append(line.matches(findString) ? line + "\n" : "");
+                            resultString.append(line.contains(findString) ? line + "\n" : "");
                         }
                     }
                 }
