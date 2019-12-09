@@ -33,9 +33,14 @@ public class task2a {
             for (File log : logFiles) {
 
                 if (log.isFile()) {
-                    Files.readAllLines(log.toPath()).
-                            forEach(line -> resultString.
-                                    append(line.matches(findString) ? line + "\n" : ""));
+                    try (BufferedReader reader = new BufferedReader(new FileReader(log))) {
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+
+                            resultString.append(line.matches(findString) ? line + "\n" : "");
+                        }
+                    }
                 }
             }
 
