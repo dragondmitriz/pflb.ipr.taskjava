@@ -38,7 +38,9 @@ public class task1 {
                     resultString = new StringBuilder();
                     size = line.length();
                 }
-                resultString.append(line);
+                resultString
+                        .append(line)
+                        .append("\n");
             }
 
             Files.write(Paths.get(prefix + index + ".log"),
