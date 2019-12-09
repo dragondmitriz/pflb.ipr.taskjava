@@ -13,8 +13,8 @@ public class task2b {
     private static final String REGEX =
             "^(\\d{2}.\\d{2}.\\d{4}) (\\d{2}:\\d{2}:\\d{2}.\\d{3}) (\\w{3}[\\w ]{2}): (((.+)\\t(.*))|(.*))$";
 
-    private static List getAllRegex(String target) {
-        List result = new ArrayList();
+    private static List<String> getAllRegex(String target) {
+        List<String> result = new ArrayList<>();
 
         Matcher matcher = Pattern.compile(REGEX).matcher(target);
         while (matcher.find()) {
@@ -38,7 +38,7 @@ public class task2b {
             String logPath = args[1];
             String resultFile = args[2];
 
-            StringBuilder resultString = new StringBuilder("");
+            StringBuilder resultString = new StringBuilder();
 
             File file = new File(logPath);
             List<File> logFiles = file.isDirectory() ?
