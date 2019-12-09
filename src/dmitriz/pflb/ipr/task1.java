@@ -1,7 +1,12 @@
 package dmitriz.pflb.ipr;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class task1 {
 
@@ -15,33 +20,30 @@ public class task1 {
 
             int size = 0;
             int index = 0;
-
-            File newLogFile = new File(prefix + index + ".log");
-            if (newLogFile.exists()) newLogFile.delete();
-
+            StringBuilder resultString = new StringBuilder();
 
             String line;
             while ((line = reader.readLine()) != null) {
 
-                try (OutputStreamWriter writer = new OutputStreamWriter(
-                        new FileOutputStream(prefix + index + ".log", true),
-                        StandardCharsets.UTF_8)) {
+                size += line.length();
+                if (size >= MAX_SIZE) {
 
-                    size += line.length();
-                    if (size >= MAX_SIZE) {
+                    System.out.println("Check max size of file - next new file.");
 
-                        System.out.println("Check max size of file - next new file.");
+                    Files.write(Paths.get(prefix + index + ".log"),
+                            resultString.toString().getBytes(),
+                            StandardOpenOption.CREATE);
 
-                        index++;
-
-                        newLogFile = new File(prefix + index + ".log");
-                        if (newLogFile.exists()) newLogFile.delete();
-
-                        size = 0;
-                    }
-                    writer.write(line + "\n");
+                    index++;
+                    resultString = new StringBuilder();
+                    size = line.length();
                 }
+                resultString.append(line);
             }
+
+            Files.write(Paths.get(prefix + index + ".log"),
+                    resultString.toString().getBytes(),
+                    StandardOpenOption.CREATE);
 
             System.out.println("Spliting is finished.");
         } catch (FileNotFoundException e) {
