@@ -38,6 +38,12 @@ public class task2b {
             String logPath = args[1];
             String resultFile = args[2];
 
+            if (Files.exists(Paths.get(resultFile))) {
+                Files.delete(Paths.get(resultFile));
+                Files.createFile(Paths.get(resultFile));
+            }
+
+
             StringBuilder resultString = new StringBuilder();
 
             File file = new File(logPath);
@@ -46,6 +52,8 @@ public class task2b {
                             listFiles((dir, name) -> name.
                                     matches(".+.log$")))) :
                     Collections.singletonList(file);
+
+            int i = 0;
             for (File log : logFiles) {
 
                 if (log.isFile()) {
@@ -58,6 +66,16 @@ public class task2b {
                             resultString
                                     .append(String.join(spliter, getAllRegex(line)))
                                     .append("\n");
+                            if (i >= 20) {
+
+                                Files.write(Paths.get(resultFile + ".csv"),
+                                        resultString.toString().getBytes(),
+                                        StandardOpenOption.APPEND);
+                                resultString = new StringBuilder();
+                                i = 0;
+                            } else {
+                                i++;
+                            }
                         }
                     }
                 }
@@ -65,7 +83,7 @@ public class task2b {
 
             Files.write(Paths.get(resultFile + ".csv"),
                     resultString.toString().getBytes(),
-                    StandardOpenOption.CREATE);
+                    StandardOpenOption.APPEND);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +

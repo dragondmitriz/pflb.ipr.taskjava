@@ -18,6 +18,11 @@ public class task2a {
             String pathLog = args[1];
             String pathResult = args[2];
 
+            if (Files.exists(Paths.get(pathResult))) {
+                Files.delete(Paths.get(pathResult));
+                Files.createFile(Paths.get(pathResult));
+            }
+
             StringBuilder resultString = new StringBuilder();
 
             File f = new File(pathLog);
@@ -28,6 +33,7 @@ public class task2a {
                     Collections.singletonList(f);
 
             for (File log : logFiles) {
+                int i = 0;
 
                 if (log.isFile()) {
                     try (BufferedReader reader = new BufferedReader(new FileReader(log))) {
@@ -35,13 +41,31 @@ public class task2a {
                         String line;
                         while ((line = reader.readLine()) != null) {
 
-                            resultString.append(line.contains(findString) ? line + "\n" : "");
+                            if (line.contains(findString)) {
+
+                                resultString
+                                        .append(line)
+                                        .append("\n");
+                                if (i >= 20) {
+
+                                    Files.write(Paths.get(pathResult),
+                                            resultString.toString().getBytes(),
+                                            StandardOpenOption.APPEND);
+                                    resultString = new StringBuilder();
+                                    i = 0;
+                                } else {
+                                    i++;
+                                }
+                            }
+
                         }
                     }
                 }
             }
 
-            Files.write(Paths.get(pathResult), resultString.toString().getBytes(), StandardOpenOption.CREATE);
+            Files.write(Paths.get(pathResult),
+                    resultString.toString().getBytes(),
+                    StandardOpenOption.APPEND);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not found full parameters.\n" +
